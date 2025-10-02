@@ -15,6 +15,11 @@ extends CharacterBody3D
 @onready var objective_text: Label = $CanvasLayer/ObjectiveText
 @onready var wheel: HBoxContainer = $CanvasLayer/Packs/WheelContainer/Wheel
 @onready var wheel_container: Panel = $CanvasLayer/Packs/WheelContainer
+@onready var pack_finish_sound: AudioStreamPlayer = $CanvasLayer/Packs/PackFinishSound
+@onready var pack_finish_el: Control = $CanvasLayer/PackFinish
+@onready var packs: Control = $CanvasLayer/Packs
+@onready var coin_collect: AudioStreamPlayer = $CanvasLayer/PackFinish/Collect
+@onready var crosshair: Control = $CanvasLayer/Crosshair
 
 var is_crouching: bool = false
 var pitch: float = 0.0
@@ -49,11 +54,11 @@ var weights = [
 ]
 
 var rarities_relation: Dictionary = {
-	"Mil-Spec" : MILSPEC_COLOUR,
-	"Restricted" : RESTRICTED_COLOUR,
-	"Classified" : CLASSIFIED_COLOUR,
-	"Covert" : COVERT_COLOUR,
-	"Special Item" : SPECIAL_COLOUR
+	"Mil-Spec" : [MILSPEC_COLOUR, 1],
+	"Restricted" : [RESTRICTED_COLOUR,3],
+	"Classified" : [CLASSIFIED_COLOUR,5],
+	"Covert" : [COVERT_COLOUR,10],
+	"Special Item" : [SPECIAL_COLOUR,50]
 }
 
 var index = 0;
@@ -80,8 +85,6 @@ func pick_weighted(items: Array, weighted_array: Array) -> Variant:
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	await get_tree().create_timer(.2).timeout
-	open_pack()
 
 func stop_movement() -> void:
 	can_move = false
@@ -117,32 +120,30 @@ func spin_to_item(target_index: int):
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_QUART)
 	tween.tween_property(wheel, "position:x", final_x, 7.0)
-	
-	# Monitor position during tween to play click sounds
+	var last_item_at_center
 	while tween.is_running():
 		await get_tree().create_timer(0.02).timeout
 		var current_x = wheel.position.x
-		# Calculate which item is currently at center
 		var item_at_center = int((center_x - current_x) / item_stride)
-		
+		last_item_at_center = item_at_center
 		if item_at_center != last_item_passed and item_at_center >= 0 and item_at_center < wheel.get_child_count():
 			last_item_passed = item_at_center
-			# Create new audio instance for each click
 			var audio = AudioStreamPlayer.new()
 			audio.stream = click_sound
 			add_child(audio)
 			audio.play()
-			# Auto-destroy after sound finishes
 			audio.finished.connect(func(): audio.queue_free())
-			print("Item passing center: ", wheel.get_child(item_at_center).name)
+
+	pack_finish(last_item_at_center)
 
 func populate_pack() -> void:
 	for e in range(300):
 		var panel = Panel.new()
 		panel.custom_minimum_size = Vector2(80,80)
 		var rarity = pick_weighted(rarities, weights)
-		var colour = rarities_relation[rarity]
+		var colour = rarities_relation[rarity][0]
 		panel.name = "%s-%s" % [index, rarity]
+		panel.set_meta("value", rarities_relation[rarity][1])
 		index += 1
 		panel.self_modulate = colour
 		
@@ -154,8 +155,46 @@ func populate_pack() -> void:
 		wheel.add_child(panel)
 		img.size = Vector2(80,80)
 
+func pack_finish(item) -> void:
+	packs.visible = false
+	pack_finish_el.visible = true
+	pack_finish_sound.play()
+	var panel_data = wheel.get_child(item)
+	
+	var panel = Panel.new()
+	panel.custom_minimum_size = Vector2(80, 80)
+	panel.size = Vector2(80, 80)
+	panel.position = Vector2(600, 320)
+	panel.self_modulate = panel_data.self_modulate
+	panel.scale = Vector2.ONE
+	
+	var texture = TextureRect.new()
+	texture.texture = coin_texture
+	texture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	texture.size = Vector2(80, 80)
+	panel.add_child(texture)
+	
+	pack_finish_el.add_child(panel)
+	
+	var tween = get_tree().create_tween()
+	tween.tween_property(panel, "position", panel.position + Vector2(0, -20), 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(panel, "scale", Vector2(1.4, 1.4), 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	
+	await get_tree().create_timer(1.1).timeout
+	
+	coin_collect.play()
+	
+	panel.call_deferred("queue_free")
+	
+	modify_coins(panel_data.get_meta("value"))
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	can_move = true
+	crosshair.visible = true
+
 func open_pack() -> void:
+	crosshair.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	packs.visible = true
 	can_move = false
 	populate_pack()
 	var spinTo = randi_range(170,280)
@@ -163,9 +202,11 @@ func open_pack() -> void:
 	await get_tree().process_frame
 	spin_to_item(spinTo)
 	index = 0
-	print("Target item: ", wheel.get_child(spinTo).name)
-	print("TextureRect: ", wheel.get_child(spinTo).get_child(0).name)
-	
+
+func death() -> void:
+	can_move = false
+	crosshair.visible = false
+
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -187,7 +228,10 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_just_pressed("interact"):
 				split[1] = "used"
 				target.name = "coins-%s" % split[1]
+				target.get_parent().get_parent().check_interactables()
 				open_pack()
+		else:
+			interact_label.visible = false
 	else:
 		interact_label.visible = false
 

@@ -66,9 +66,13 @@ func purchase(item: String) -> void:
 
 func _on_thief_trigger_body_entered(body: Node3D) -> void:
 	if body.name == "Player" and stolen_food:
+		stolen_food = false
 		come_back_and_pay.play()
 		left_with_food = true
+		await get_tree().create_timer(15).timeout
+		left_with_food = false
 		
 func _on_thief_trigger_2_body_entered(body: Node3D) -> void:
 	if body.name == "Player" and left_with_food:
 		oh_you_came_back.play()
+		left_with_food = false

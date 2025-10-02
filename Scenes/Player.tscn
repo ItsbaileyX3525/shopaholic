@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bv6lo5hx8adde"]
+[gd_scene load_steps=12 format=3 uid="uid://bv6lo5hx8adde"]
 
 [ext_resource type="Script" uid="uid://1w5fk7h2jji6" path="res://Scripts/Player.gd" id="1_rpqav"]
 [ext_resource type="Texture2D" uid="uid://d00x7lbmn00vn" path="res://CoffeeShopStarterPack/UI/crosshair.png" id="2_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://cjes03thtvfeh" path="res://CoffeeShopStarterPack/UI/coin.png" id="3_gntrk"]
+[ext_resource type="AudioStream" uid="uid://dj5j5gjw8cqkk" path="res://CoffeeShopStarterPack/UI/caseFinish.mp3" id="4_dewec"]
+[ext_resource type="AudioStream" uid="uid://b577m63w3uewf" path="res://CoffeeShopStarterPack/UI/coinCollect.mp3" id="5_5ixxa"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qbkls"]
 albedo_color = Color(0, 1, 0.5882353, 1)
@@ -16,9 +18,6 @@ size = Vector3(0.85058594, 1.82164, 1)
 albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_gntrk"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gntrk"]
-size = Vector2(80, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kyqiw"]
 size = Vector2(14, 80)
@@ -60,7 +59,6 @@ mesh = SubResource("SphereMesh_gntrk")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Crosshair" type="Control" parent="CanvasLayer"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -188,7 +186,21 @@ text = "OBJECTIVE:
 Get some food from \"Coffee Shop\""
 autowrap_mode = 3
 
+[node name="DayText" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -148.0
+offset_right = 148.0
+offset_bottom = 38.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 36
+text = "DAY: 1"
+horizontal_alignment = 1
+autowrap_mode = 3
+
 [node name="Packs" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -213,35 +225,6 @@ offset_right = 1280.0
 offset_bottom = 80.0
 theme_override_constants/separation = 6
 
-[node name="Panel" type="Panel" parent="CanvasLayer/Packs/WheelContainer/Wheel"]
-self_modulate = Color(6.848802, 13.750843, 12.130976, 1)
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Packs/WheelContainer/Wheel/Panel"]
-layout_mode = 0
-offset_right = 80.0
-offset_bottom = 80.0
-texture = ExtResource("3_gntrk")
-expand_mode = 1
-
-[node name="Area2D" type="Area2D" parent="CanvasLayer/Packs/WheelContainer/Wheel/Panel"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Packs/WheelContainer/Wheel/Panel/Area2D"]
-position = Vector2(40, 40)
-shape = SubResource("RectangleShape2D_gntrk")
-
-[node name="Panel2" type="Panel" parent="CanvasLayer/Packs/WheelContainer/Wheel"]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Packs/WheelContainer/Wheel/Panel2"]
-layout_mode = 0
-offset_right = 80.0
-offset_bottom = 80.0
-texture = ExtResource("3_gntrk")
-expand_mode = 1
-
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/Packs"]
 layout_mode = 1
 anchors_preset = 8
@@ -262,6 +245,36 @@ color = Color(0.35686275, 0.35686275, 0.35686275, 0.7372549)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Packs/ColorRect/Area2D"]
 position = Vector2(7, 40)
 shape = SubResource("RectangleShape2D_kyqiw")
+
+[node name="PackFinishSound" type="AudioStreamPlayer" parent="CanvasLayer/Packs"]
+stream = ExtResource("4_dewec")
+
+[node name="PackFinish" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/PackFinish"]
+visible = false
+self_modulate = Color(6.848802, 13.750843, 12.130976, 1)
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 0
+offset_left = 601.0
+offset_top = 321.0
+offset_right = 681.0
+offset_bottom = 401.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PackFinish/Panel"]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 80.0
+texture = ExtResource("3_gntrk")
+expand_mode = 1
+
+[node name="Collect" type="AudioStreamPlayer" parent="CanvasLayer/PackFinish"]
+stream = ExtResource("5_5ixxa")
 
 [connection signal="pressed" from="CanvasLayer/Purchase/VBoxContainer/HBoxContainer/JAM TOAST" to="." method="_on_jam_toast_pressed"]
 [connection signal="pressed" from="CanvasLayer/Purchase/VBoxContainer/HBoxContainer/DONIT" to="." method="_on_donit_pressed"]
