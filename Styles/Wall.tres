@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bios13kfam10h"]
+
+[ext_resource type="Texture2D" uid="uid://bxsca5ctf8oqg" path="res://CoffeeShopStarterPack/Materials/wall.jpg" id="1_vvurp"]
+
+[resource]
+albedo_texture = ExtResource("1_vvurp")
+albedo_texture_force_srgb = true
+uv1_scale = Vector3(2.91, 2.91, 2.91)
+uv1_offset = Vector3(0.305, 0, 0)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 0.21022448

@@ -1,0 +1,720 @@
+[gd_scene load_steps=56 format=3 uid="uid://xniyb2msy5dj"]
+
+[ext_resource type="PackedScene" uid="uid://bv6lo5hx8adde" path="res://Scenes/Player.tscn" id="1_5cjrv"]
+[ext_resource type="Material" uid="uid://80luq80ahugo" path="res://Styles/WallpaperCoffeeShop.tres" id="1_gjpho"]
+[ext_resource type="PackedScene" uid="uid://b244m02ij4gfh" path="res://CoffeeShopStarterPack/Models/foods/PW_stove.fbx" id="1_j0p05"]
+[ext_resource type="Material" uid="uid://bios13kfam10h" path="res://Styles/Wall.tres" id="2_p70al"]
+[ext_resource type="Texture2D" uid="uid://ubd857clkxjp" path="res://CoffeeShopStarterPack/Materials/Floor.jpg" id="3_45d1s"]
+[ext_resource type="PackedScene" uid="uid://25hly5doj4iw" path="res://CoffeeShopStarterPack/Models/foods/PW_plate01.fbx" id="4_7yo87"]
+[ext_resource type="PackedScene" uid="uid://dwvo3ro1o5lpq" path="res://CoffeeShopStarterPack/Models/foods/PW_frenchtoast_strawberry.fbx" id="5_ti1bm"]
+[ext_resource type="PackedScene" uid="uid://cdbyb1nhdwaw7" path="res://CoffeeShopStarterPack/Models/foods/PW_display01.fbx" id="6_op4cu"]
+[ext_resource type="PackedScene" uid="uid://u8cqsriyayjr" path="res://CoffeeShopStarterPack/Models/foods/PW_cupcake_chocolattechips.fbx" id="7_8l3nt"]
+[ext_resource type="PackedScene" uid="uid://c22j2bo7lvuki" path="res://CoffeeShopStarterPack/Models/foods/PW_espressomachine.fbx" id="8_kwl8l"]
+[ext_resource type="Script" uid="uid://cswaqkxgwmo7j" path="res://Scripts/NPCScripts/order.gd" id="11_ti1bm"]
+[ext_resource type="PackedScene" uid="uid://vfqmqr8gnww3" path="res://CoffeeShopStarterPack/NPC/normal-woman-a.glb" id="11_xiqgv"]
+[ext_resource type="AudioStream" uid="uid://blkxcwfwnp216" path="res://CoffeeShopStarterPack/Audio/NPC/order/helloand.wav" id="12_op4cu"]
+[ext_resource type="AudioStream" uid="uid://bvneggxk43mdu" path="res://CoffeeShopStarterPack/Audio/NPC/order/iseecomi.wav" id="13_8l3nt"]
+[ext_resource type="AudioStream" uid="uid://mx5mp7tu4iv4" path="res://CoffeeShopStarterPack/Audio/NPC/order/enjoyyou.wav" id="14_r0dna"]
+[ext_resource type="PackedScene" uid="uid://ddwfhln2gljb0" path="res://CoffeeShopStarterPack/Models/foods/PW_cheesecake_strawberry.fbx" id="14_rwt1y"]
+[ext_resource type="AudioStream" uid="uid://byli4o1c000pw" path="res://CoffeeShopStarterPack/Audio/NPC/order/excuseme.wav" id="15_b5aes"]
+[ext_resource type="PackedScene" uid="uid://c7ajtvid0dmol" path="res://CoffeeShopStarterPack/Models/foods/PW_croissant.fbx" id="15_mvfa8"]
+[ext_resource type="PackedScene" uid="uid://owis7837hfmi" path="res://CoffeeShopStarterPack/Models/foods/PW_cookie.fbx" id="16_r0dna"]
+[ext_resource type="AudioStream" uid="uid://4xweftns1cy1" path="res://CoffeeShopStarterPack/Audio/NPC/order/heygetba.wav" id="16_w0bku"]
+[ext_resource type="AudioStream" uid="uid://lbvo83ji4l0w" path="res://CoffeeShopStarterPack/Audio/NPC/order/ohyouact.wav" id="17_0ao37"]
+[ext_resource type="PackedScene" uid="uid://of45cqfv0nl0" path="res://CoffeeShopStarterPack/Models/foods/PW_doughnut_pink.fbx" id="17_b5aes"]
+[ext_resource type="Script" uid="uid://7kodl2v8ny7a" path="res://Scripts/PurchaseHandler.gd" id="20_b5aes"]
+[ext_resource type="PackedScene" uid="uid://b11gtiuwc4ptp" path="res://CoffeeShopStarterPack/Models/houses-kenny/building-type-a.glb" id="23_d3ars"]
+[ext_resource type="PackedScene" uid="uid://b6ftidgddoodx" path="res://CoffeeShopStarterPack/Models/houses-kenny/fence.glb" id="24_l11rc"]
+[ext_resource type="PackedScene" uid="uid://bh8y7jq4lvmey" path="res://CoffeeShopStarterPack/Models/interactables/barrel-open.glb" id="25_w86vl"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5cjrv"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_j0p05"]
+sky_material = SubResource("ProceduralSkyMaterial_5cjrv")
+
+[sub_resource type="Environment" id="Environment_5nsto"]
+background_mode = 2
+sky = SubResource("Sky_j0p05")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_o3h3i"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5cjrv"]
+size = Vector3(124.488174, 1, 149.48734)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5nsto"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rwt1y"]
+size = Vector3(16.184387, 12.072174, 1.3120117)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_33kev"]
+size = Vector3(29.67749, 13.112183, 1.1044922)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mvfa8"]
+size = Vector3(57.166397, 12.080139, 1.144043)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r0dna"]
+size = Vector3(56.867523, 12.867126, 1.9096069)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b5aes"]
+size = Vector3(1.0469055, 52.276123, 12.547791)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y7y61"]
+albedo_texture = ExtResource("3_45d1s")
+albedo_texture_force_srgb = true
+uv1_scale = Vector3(5.51, 5.51, 5.51)
+
+[sub_resource type="BoxMesh" id="BoxMesh_q2d71"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uo7di"]
+albedo_color = Color(0.43468103, 0.3097013, 0.1375522, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w0bku"]
+size = Vector3(9.847076, 3.586792, 2.529541)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0ao37"]
+size = Vector3(2.5926285, 3.586792, 30.70546)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d3ars"]
+size = Vector3(0.5722656, 1.3051758, 0.54785156)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l11rc"]
+size = Vector3(1.1898804, 1.395752, 1.2996826)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_op4cu"]
+size = Vector3(2.7286682, 2.1152344, 2.7841492)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ti1bm"]
+size = Vector3(1.3044434, 2.4085693, 1)
+
+[sub_resource type="Animation" id="Animation_8l3nt"]
+resource_name = "Cook"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(48.751045, -0.07786369, -17.926807), Vector3(49.12319, -0.07786369, -11.942067)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -1.5707964, 0), Vector3(0, 1.5707964, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kwl8l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(48.751045, -0.07786369, -17.926807)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -1.5707964, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xiqgv"]
+_data = {
+&"Cook": SubResource("Animation_8l3nt"),
+&"RESET": SubResource("Animation_kwl8l")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w86vl"]
+size = Vector3(0.45013428, 0.055603027, 0.41333008)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g01fq"]
+size = Vector3(8.426758, 11.246704, 4.5961914)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0bcf6"]
+size = Vector3(8.426758, 11.246704, 9.340088)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7dsfl"]
+size = Vector3(1.3651123, 1.3302002, 0.8314209)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y1bqn"]
+size = Vector3(8.354736, 1, 0.20848083)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mq4nq"]
+size = Vector3(0.2624817, 0.85302734, 0.26586914)
+
+[node name="World" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 43.4837, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5nsto")
+
+[node name="WorldObjectsMisc" type="Node3D" parent="WorldEnvironment"]
+
+[node name="Floor" type="StaticBody3D" parent="WorldEnvironment/WorldObjectsMisc"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldEnvironment/WorldObjectsMisc/Floor"]
+transform = Transform3D(124.521484, 0, 0, 0, 1, 0, 0, 0, 149.77545, 0, 0, 0)
+mesh = SubResource("BoxMesh_o3h3i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldObjectsMisc/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.033348083, 0, -0.02973938)
+shape = SubResource("BoxShape3D_5cjrv")
+
+[node name="CoffeeShop" type="Node3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.64431715, -14.173757)
+
+[node name="Structure" type="Node3D" parent="WorldEnvironment/CoffeeShop"]
+
+[node name="Wall" type="StaticBody3D" parent="WorldEnvironment/CoffeeShop/Structure"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldEnvironment/CoffeeShop/Structure/Wall"]
+transform = Transform3D(16.295462, 0, 0, 0, 24.416416, 0, 0, 0, 1, 12.613392, 0.3411398, 0)
+material_override = ExtResource("1_gjpho")
+mesh = SubResource("BoxMesh_5nsto")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/CoffeeShop/Structure/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.686501, 5.536087, 0.13647461)
+shape = SubResource("BoxShape3D_rwt1y")
+
+[node name="Wall7" type="StaticBody3D" parent="WorldEnvironment/CoffeeShop/Structure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.25739193)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldEnvironment/CoffeeShop/Structure/Wall7"]
+transform = Transform3D(16.295462, 0, 0, 0, 24.416416, 0, 0, 0, 1, 12.613392, 0.3411398, 0)
+material_override = ExtResource("2_p70al")
+mesh = SubResource("BoxMesh_5nsto")
+
+[node name="Wall6" type="StaticBody3D" parent="WorldEnvironment/CoffeeShop/Structure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.220383, 0, -56.21652)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldEnvironment/CoffeeShop/Structure/Wall6"]
+transform = Transform3D(1.0903853e-13, -52.93432, 4.371138e-08, -2.4945111e-06, -2.3138325e-06, -0.9999998, 57.06776, -6.7762636e-21, -4.371138e-08, 11.573374, 12.102552, 28.16322)
+mesh = SubResource("BoxMesh_5nsto")
+skeleton = NodePath("../../Wall5")
+
+[node name="Wall4" type="StaticBody3D" parent="WorldEnvironment/CoffeeShop/Structure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.019886, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldEnvironment/CoffeeShop/Structure/Wall4"]
+transform = Transform3D(28.655727, 0, 0, 0, 24.416416, 0, 0, 0, 1, 12.8689, 0.3411398, 0)
+material_override = ExtResource("1_gjpho")
+mesh = SubResource("BoxMesh_5nsto")
+
+[node name="Wall10" type="StaticBody3D" parent="WorldEnvironment/CoffeeShop/Structure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.019886, 0, 0.09091568)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldEnvironment/CoffeeShop/Structure/Wall10"]
+transform = Transform3D(28.655727, 0, 0, 0, 24.416416, 0, 0, 0, 1, 12.8689, 0.3411398, 0)
+material_override = ExtResource("2_p70al")
+mesh = SubResource("BoxMesh_5nsto")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/CoffeeShop/Structure/Wall10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.354614, 6.0560913, -0.052246094)
+shape = SubResource("BoxShape3D_33kev")
+
+[node name="Wall2" type="StaticBody3D" parent="WorldEnvironment/CoffeeShop/Structure"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 4.249715, 0, -20.28358)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldEnvironment/CoffeeShop/Structure/Wall2"]
+transform = Transform3D(57.06776, 0, 0, 0, 24.416416, 0, 0, 0, 0.9999999, -7.769718, 0.3411398, 9.536743e-07)
+material_override = ExtResource("1_gjpho")
+mesh = SubResource("BoxMesh_5nsto")
+
+[node name="Wall8" type="StaticBody3D" parent="WorldEnvironment/CoffeeShop/Structure"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 4.1194324, 0, -20.28358)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldEnvironment/CoffeeShop/Structure/Wall8"]
+transform = Transform3D(57.06776, 0, 0, 0, 24.416416, 0, 0, 0, 0.9999999, -7.769718, 0.3411398, 9.536743e-07)
+material_override = ExtResource("2_p70al")
+mesh = SubResource("BoxMesh_5nsto")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/CoffeeShop/Structure/Wall8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.842842, 5.5400696, -0.07202101)
+shape = SubResource("BoxShape3D_mvfa8")
+
+[node name="Wall3" type="StaticBody3D" parent="WorldEnvironment/CoffeeShop/Structure"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 60.2245, 0, -20.28358)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldEnvironment/CoffeeShop/Structure/Wall3"]
+transform = Transform3D(57.06776, 0, -7.1054274e-15, 0, 24.416416, 0, 0, 0, 1.7771533, -7.769718, 0.3411398, 4.858387)
+material_override = ExtResource("1_gjpho")
+mesh = SubResource("BoxMesh_5nsto")
+
+[node name="Wall9" type="StaticBody3D" parent="WorldEnvironment/CoffeeShop/Structure"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 60.294376, 0, -20.28358)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldEnvironment/CoffeeShop/Structure/Wall9"]
+transform = Transform3D(57.06776, 0, -7.1054274e-15, 0, 24.416416, 0, 0, 0, 1.7771533, -7.769718, 0.3411398, 4.858387)
+material_override = ExtResource("2_p70al")
+mesh = SubResource("BoxMesh_5nsto")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/CoffeeShop/Structure/Wall9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.7503815, 5.933563, 4.8831024)
+shape = SubResource("BoxShape3D_r0dna")
+
+[node name="Wall5" type="StaticBody3D" parent="WorldEnvironment/CoffeeShop/Structure"]
+transform = Transform3D(1.9106855e-15, -1, 4.371139e-08, -4.371139e-08, -4.371139e-08, -1, 1, 0, -4.371139e-08, 29.134895, 17.54279, -20.28358)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldEnvironment/CoffeeShop/Structure/Wall5"]
+transform = Transform3D(9.6106825e-14, -1.0672754e-06, 1, -50.299656, -1.0672754e-06, 0, 2.1986677e-06, -24.416416, -4.371139e-08, -35.932938, -0.69887924, 17.20165)
+material_override = ExtResource("1_gjpho")
+mesh = SubResource("BoxMesh_5nsto")
+skeleton = NodePath("../../Wall6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/CoffeeShop/Structure/Wall5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.918137, -0.87390137, 11.289658)
+shape = SubResource("BoxShape3D_b5aes")
+
+[node name="Floor" type="StaticBody3D" parent="WorldEnvironment/CoffeeShop/Structure"]
+transform = Transform3D(0.42321238, 0, 0, 0, 1, 0, 0, 0, 0.37631893, 30.01479, -0.5778637, -27.980785)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldEnvironment/CoffeeShop/Structure/Floor"]
+transform = Transform3D(124.521484, 0, 0, 0, 1, 0, 0, 0, 149.77545, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_y7y61")
+mesh = SubResource("BoxMesh_o3h3i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/CoffeeShop/Structure/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.033348083, 0, -0.02973938)
+shape = SubResource("BoxShape3D_5cjrv")
+
+[node name="Furnishing" type="Node3D" parent="WorldEnvironment/CoffeeShop"]
+
+[node name="Counter" type="StaticBody3D" parent="WorldEnvironment/CoffeeShop/Furnishing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.798126, 0, -42.248386)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldEnvironment/CoffeeShop/Furnishing/Counter"]
+transform = Transform3D(2.399393, 0, 0, 0, 5.0282774, 0, 0, 0, 30.688257, 0, 0.19726658, 22.520958)
+mesh = SubResource("BoxMesh_q2d71")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="WorldEnvironment/CoffeeShop/Furnishing/Counter"]
+transform = Transform3D(10.425242, 0, 0, 0, 5.0282774, 0, 0, 0, 2.4680016, 4.8833275, 0.19726658, 8.396336)
+mesh = SubResource("BoxMesh_q2d71")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="WorldEnvironment/CoffeeShop/Furnishing/Counter"]
+transform = Transform3D(2.5142605, 0, 0, 0, 0.38493475, 0, 0, 0, 30.688257, 0, 2.8927479, 22.520958)
+material_override = SubResource("StandardMaterial3D_uo7di")
+mesh = SubResource("BoxMesh_q2d71")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="WorldEnvironment/CoffeeShop/Furnishing/Counter"]
+transform = Transform3D(-1.0990182e-07, 0, -8.628722, 0, 0.38493475, 0, -2.5142605, 0, 3.7717345e-07, 4.442192, 2.8927479, 8.416119)
+material_override = SubResource("StandardMaterial3D_uo7di")
+mesh = SubResource("BoxMesh_q2d71")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="WorldEnvironment/CoffeeShop/Furnishing/Counter"]
+transform = Transform3D(2.5142605, 0, 0, 0, 0.38493475, 0, 0, 0, 4.822903, 0, 2.502771, 39.327446)
+material_override = SubResource("StandardMaterial3D_uo7di")
+mesh = SubResource("BoxMesh_q2d71")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/CoffeeShop/Furnishing/Counter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7256927, 1.293396, 8.433765)
+shape = SubResource("BoxShape3D_w0bku")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="WorldEnvironment/CoffeeShop/Furnishing/Counter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0651207, 1.293396, 22.521725)
+shape = SubResource("BoxShape3D_0ao37")
+
+[node name="Items" type="Node3D" parent="WorldEnvironment/CoffeeShop/Furnishing"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="PW_plate01" parent="WorldEnvironment/CoffeeShop/Furnishing/Items" instance=ExtResource("4_7yo87")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.236839, 1.0377986, -3.4019346)
+
+[node name="PW_frenchtoast_strawberry" parent="WorldEnvironment/CoffeeShop/Furnishing/Items" instance=ExtResource("5_ti1bm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.233207, 1.0703219, -3.4143534)
+
+[node name="PW_display01" parent="WorldEnvironment/CoffeeShop/Furnishing/Items" instance=ExtResource("6_op4cu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.232571, 1.0061529, -7.9906693)
+
+[node name="PW_cupcake_chocolattechips" parent="WorldEnvironment/CoffeeShop/Furnishing/Items" instance=ExtResource("7_8l3nt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.235489, 1.0386255, -8.015664)
+
+[node name="PW_espressomachine" parent="WorldEnvironment/CoffeeShop/Furnishing/Items" instance=ExtResource("8_kwl8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.163269, 1.0202677, -11.334619)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="WorldEnvironment/CoffeeShop/Furnishing/Items/PW_espressomachine"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/CoffeeShop/Furnishing/Items/PW_espressomachine/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.016601563, 0.15258777, 0.008300781)
+shape = SubResource("BoxShape3D_d3ars")
+
+[node name="PW_stove" parent="WorldEnvironment/CoffeeShop/Furnishing/Items" instance=ExtResource("1_j0p05")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 17.813755, -0.025954723, -3.9949245)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="WorldEnvironment/CoffeeShop/Furnishing/Items/PW_stove"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/CoffeeShop/Furnishing/Items/PW_stove/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00064086914, 0.6990967, 0.14984131)
+shape = SubResource("BoxShape3D_l11rc")
+
+[node name="OrderNPC" parent="WorldEnvironment/CoffeeShop" instance=ExtResource("11_xiqgv")]
+transform = Transform3D(-1.5298986e-07, 0, -3.5, 0, 3.5, 0, 3.5, 0, -1.5298986e-07, 48.751045, -0.07786369, -17.926807)
+
+[node name="Area3D" type="Area3D" parent="WorldEnvironment/CoffeeShop/OrderNPC"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.80943835, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/CoffeeShop/OrderNPC/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.052505493, -0.25390625, 0.89207935)
+shape = SubResource("BoxShape3D_op4cu")
+
+[node name="Collider" type="StaticBody3D" parent="WorldEnvironment/CoffeeShop/OrderNPC"]
+script = ExtResource("11_ti1bm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/CoffeeShop/OrderNPC/Collider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04748535, 0.70428497, 0)
+shape = SubResource("BoxShape3D_ti1bm")
+
+[node name="VoiceLines" type="Node3D" parent="WorldEnvironment/CoffeeShop/OrderNPC"]
+
+[node name="Welcome" type="AudioStreamPlayer3D" parent="WorldEnvironment/CoffeeShop/OrderNPC/VoiceLines"]
+stream = ExtResource("12_op4cu")
+
+[node name="ComingUp" type="AudioStreamPlayer3D" parent="WorldEnvironment/CoffeeShop/OrderNPC/VoiceLines"]
+stream = ExtResource("13_8l3nt")
+
+[node name="Enjoy" type="AudioStreamPlayer3D" parent="WorldEnvironment/CoffeeShop/OrderNPC/VoiceLines"]
+stream = ExtResource("14_r0dna")
+
+[node name="HowPay" type="AudioStreamPlayer3D" parent="WorldEnvironment/CoffeeShop/OrderNPC/VoiceLines"]
+stream = ExtResource("15_b5aes")
+
+[node name="ComeBackAndPay" type="AudioStreamPlayer3D" parent="WorldEnvironment/CoffeeShop/OrderNPC/VoiceLines"]
+stream = ExtResource("16_w0bku")
+
+[node name="OhYouCameBack" type="AudioStreamPlayer3D" parent="WorldEnvironment/CoffeeShop/OrderNPC/VoiceLines"]
+stream = ExtResource("17_0ao37")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WorldEnvironment/CoffeeShop/OrderNPC"]
+libraries = {
+&"": SubResource("AnimationLibrary_xiqgv")
+}
+
+[node name="FoodCollect" type="Node3D" parent="WorldEnvironment/CoffeeShop"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 45.72893, -15.715158, -19.744278)
+
+[node name="PW_cheesecake_strawberry" parent="WorldEnvironment/CoffeeShop/FoodCollect" instance=ExtResource("14_rwt1y")]
+visible = false
+
+[node name="PW_croissant" parent="WorldEnvironment/CoffeeShop/FoodCollect" instance=ExtResource("15_mvfa8")]
+visible = false
+
+[node name="PW_cookie" parent="WorldEnvironment/CoffeeShop/FoodCollect" instance=ExtResource("16_r0dna")]
+visible = false
+
+[node name="PW_cupcake_chocolattechips" parent="WorldEnvironment/CoffeeShop/FoodCollect" instance=ExtResource("7_8l3nt")]
+visible = false
+
+[node name="PW_doughnut_pink" parent="WorldEnvironment/CoffeeShop/FoodCollect" instance=ExtResource("17_b5aes")]
+visible = false
+
+[node name="PW_frenchtoast_strawberry" parent="WorldEnvironment/CoffeeShop/FoodCollect" instance=ExtResource("5_ti1bm")]
+visible = false
+
+[node name="PurchaseHandler" type="StaticBody3D" parent="WorldEnvironment/CoffeeShop/FoodCollect"]
+script = ExtResource("20_b5aes")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/CoffeeShop/FoodCollect/PurchaseHandler"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018707275, -0.0093688965, 0.025268555)
+shape = SubResource("BoxShape3D_w86vl")
+
+[node name="Triggers" type="Node3D" parent="WorldEnvironment/CoffeeShop"]
+
+[node name="ThiefTrigger" type="Area3D" parent="WorldEnvironment/CoffeeShop/Triggers"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/CoffeeShop/Triggers/ThiefTrigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.83559, 5.123352, -2.499343)
+shape = SubResource("BoxShape3D_g01fq")
+
+[node name="ThiefTrigger2" type="Area3D" parent="WorldEnvironment/CoffeeShop/Triggers"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/CoffeeShop/Triggers/ThiefTrigger2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.58295, 5.123352, -17.121208)
+shape = SubResource("BoxShape3D_0bcf6")
+
+[node name="Houses" type="Node3D" parent="WorldEnvironment"]
+transform = Transform3D(21, 0, 0, 0, 21, 0, 0, 0, 21, 0, 0, 0)
+
+[node name="building-type-a2" parent="WorldEnvironment/Houses" instance=ExtResource("23_d3ars")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8203617, 0, -1.0536933)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="WorldEnvironment/Houses/building-type-a2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Houses/building-type-a2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01373291, 0.1651001, 0.06365955)
+shape = SubResource("BoxShape3D_7dsfl")
+
+[node name="Borders" type="Node3D" parent="WorldEnvironment"]
+transform = Transform3D(-8.742278e-07, 0, 20, 0, 25, 0, -20, 0, -8.742278e-07, -61.297092, 0, 0)
+
+[node name="MassCollider1" type="StaticBody3D" parent="WorldEnvironment/Borders"]
+transform = Transform3D(1, 0, 3.5527137e-15, 0, 1, 0, -3.5527137e-15, 0, 1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Borders/MassCollider1"]
+transform = Transform3D(1, 0, -3.5527137e-15, 0, 1, 0, 3.5527137e-15, 0, 1, 0.2364502, 0, -0.05422187)
+shape = SubResource("BoxShape3D_y1bqn")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="WorldEnvironment/Borders/MassCollider1"]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 3.8157384, 0, 3.1934657)
+shape = SubResource("BoxShape3D_y1bqn")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="WorldEnvironment/Borders/MassCollider1"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.23633377, 0, 6.08893)
+shape = SubResource("BoxShape3D_y1bqn")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="WorldEnvironment/Borders/MassCollider1"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -3.4710155, 0, 2.2291453)
+shape = SubResource("BoxShape3D_y1bqn")
+
+[node name="fence2" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+
+[node name="fence46" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(1, 0, 3.5527137e-15, 0, 1, 0, -3.5527137e-15, 0, 1, 0.4008362, 0, 0)
+
+[node name="fence47" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(1, 0, 3.5527137e-15, 0, 1, 0, -3.5527137e-15, 0, 1, 0.80091727, 0, 0)
+
+[node name="fence48" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(1, 0, 3.5527137e-15, 0, 1, 0, -3.5527137e-15, 0, 1, 1.1989325, 0, 0)
+
+[node name="fence49" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(1, 0, 3.5527137e-15, 0, 1, 0, -3.5527137e-15, 0, 1, 1.5992075, 0, 0)
+
+[node name="fence50" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(1, 0, 3.5527137e-15, 0, 1, 0, -3.5527137e-15, 0, 1, 2.0016148, 0, 0)
+
+[node name="fence51" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(1, 0, 3.5527137e-15, 0, 1, 0, -3.5527137e-15, 0, 1, 2.401386, 0, 0)
+
+[node name="fence52" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(1, 0, 3.5527137e-15, 0, 1, 0, -3.5527137e-15, 0, 1, 2.8015964, 0, 0)
+
+[node name="fence53" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(1, 0, 3.5527137e-15, 0, 1, 0, -3.5527137e-15, 0, 1, 3.2032743, 0, 0)
+
+[node name="fence54" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(1, 0, 3.5527137e-15, 0, 1, 0, -3.5527137e-15, 0, 1, 3.6002386, 0, 0)
+
+[node name="fence55" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, 3.746639, 0, 0.20146322)
+
+[node name="fence56" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, 3.7466388, 0, 0.5981457)
+
+[node name="fence57" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, 3.7466388, 0, 0.9942641)
+
+[node name="fence58" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, 3.7466388, 0, 1.3940476)
+
+[node name="fence59" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, 3.7466388, 0, 1.7960403)
+
+[node name="fence60" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, 3.7466388, 0, 2.196796)
+
+[node name="fence61" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, 3.7466388, 0, 2.5980127)
+
+[node name="fence62" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, 3.7466388, 0, 2.9973752)
+
+[node name="fence63" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, 3.7466388, 0, 3.3916216)
+
+[node name="fence64" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, 3.7466388, 0, 3.7852666)
+
+[node name="fence65" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, 3.7466388, 0, 4.1868067)
+
+[node name="fence66" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, 3.7466388, 0, 4.5880723)
+
+[node name="fence67" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, 3.746639, 0, 5.0019298)
+
+[node name="fence3" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(1, 0, 3.5527137e-15, 0, 1, 0, -3.5527137e-15, 0, 1, -0.40228868, 0, 0)
+
+[node name="fence4" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(1, 0, 3.5527137e-15, 0, 1, 0, -3.5527137e-15, 0, 1, -0.8019625, 0, 0)
+
+[node name="fence5" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(1, 0, 3.5527137e-15, 0, 1, 0, -3.5527137e-15, 0, 1, -1.2015849, 0, 0)
+
+[node name="fence6" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(1, 0, 3.5527137e-15, 0, 1, 0, -3.5527137e-15, 0, 1, -1.6020931, 0, 0)
+
+[node name="fence7" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(1, 0, 3.5527137e-15, 0, 1, 0, -3.5527137e-15, 0, 1, -2.0035083, 0, 0)
+
+[node name="fence8" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(1, 0, 3.5527137e-15, 0, 1, 0, -3.5527137e-15, 0, 1, -2.4048321, 0, 0)
+
+[node name="fence9" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(1, 0, 3.5527137e-15, 0, 1, 0, -3.5527137e-15, 0, 1, -2.8063486, 0, 0)
+
+[node name="fence10" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(1, 0, 3.5527137e-15, 0, 1, 0, -3.5527137e-15, 0, 1, -3.2082775, 0, 0)
+
+[node name="fence11" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, -3.4073865, 0, 0.20256639)
+
+[node name="fence12" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, -3.407387, 0, 0.9985521)
+
+[node name="fence14" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, -3.4073875, 0, 1.4025913)
+
+[node name="fence15" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, -3.4073877, 0, 1.8020505)
+
+[node name="fence16" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, -3.4073877, 0, 2.199789)
+
+[node name="fence17" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, -3.4073877, 0, 2.6006348)
+
+[node name="fence18" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, -3.4073877, 0, 3.0007486)
+
+[node name="fence19" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, -3.4073877, 0, 3.4003391)
+
+[node name="fence20" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, -3.4073877, 0, 3.7970233)
+
+[node name="fence21" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, -3.4073877, 0, 4.195657)
+
+[node name="fence22" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, -3.4073877, 0, 4.596563)
+
+[node name="fence23" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, -3.4073875, 0, 4.9998612)
+
+[node name="fence24" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, -3.4073875, 0, 5.4098406)
+
+[node name="fence25" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, -3.4073877, 0, 5.81078)
+
+[node name="fence26" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-1, 0, -8.7422784e-08, 0, 1, 0, 8.7422784e-08, 0, -1, -3.2064455, 0, 6.0119343)
+
+[node name="fence27" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-1, 0, -8.7422784e-08, 0, 1, 0, 8.7422784e-08, 0, -1, -2.8109295, 0, 6.0119343)
+
+[node name="fence28" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-1, 0, -8.7422784e-08, 0, 1, 0, 8.7422784e-08, 0, -1, -2.4108295, 0, 6.0119343)
+
+[node name="fence29" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-1, 0, -8.7422784e-08, 0, 1, 0, 8.7422784e-08, 0, -1, -2.0136936, 0, 6.0119343)
+
+[node name="fence30" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-1, 0, -8.7422784e-08, 0, 1, 0, 8.7422784e-08, 0, -1, -1.6178765, 0, 6.0119343)
+
+[node name="fence31" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-1, 0, -8.7422784e-08, 0, 1, 0, 8.7422784e-08, 0, -1, -1.2244756, 0, 6.0119343)
+
+[node name="fence32" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-1, 0, -8.7422784e-08, 0, 1, 0, 8.7422784e-08, 0, -1, -0.82957006, 0, 6.0119343)
+
+[node name="fence33" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-1, 0, -8.7422784e-08, 0, 1, 0, 8.7422784e-08, 0, -1, -0.43073025, 0, 6.0119343)
+
+[node name="fence34" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-1, 0, -8.7422784e-08, 0, 1, 0, 8.7422784e-08, 0, -1, -0.029073501, 0, 6.0119343)
+
+[node name="fence35" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-1, 0, -8.7422784e-08, 0, 1, 0, 8.7422784e-08, 0, -1, 0.36770922, 0, 6.0119343)
+
+[node name="fence36" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-1, 0, -8.7422784e-08, 0, 1, 0, 8.7422784e-08, 0, -1, 0.76701105, 0, 6.0119343)
+
+[node name="fence37" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-1, 0, -8.7422784e-08, 0, 1, 0, 8.7422784e-08, 0, -1, 1.1719971, 0, 6.0119343)
+
+[node name="fence38" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-1, 0, -8.7422784e-08, 0, 1, 0, 8.7422784e-08, 0, -1, 1.5732579, 0, 6.0119343)
+
+[node name="fence39" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-1, 0, -8.7422784e-08, 0, 1, 0, 8.7422784e-08, 0, -1, 1.9732931, 0, 6.0119343)
+
+[node name="fence40" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-1, 0, -8.7422784e-08, 0, 1, 0, 8.7422784e-08, 0, -1, 2.370331, 0, 6.0119343)
+
+[node name="fence41" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-1, 0, -8.7422784e-08, 0, 1, 0, 8.7422784e-08, 0, -1, 2.770947, 0, 6.0119343)
+
+[node name="fence42" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-1, 0, -8.7422784e-08, 0, 1, 0, 8.7422784e-08, 0, -1, 3.1662767, 0, 6.0119343)
+
+[node name="fence43" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-1, 0, -8.7422784e-08, 0, 1, 0, 8.7422784e-08, 0, -1, 3.567665, 0, 6.0119343)
+
+[node name="fence44" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(1.3113419e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113419e-07, 3.7544467, 0, 5.812826)
+
+[node name="fence45" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(1.3113419e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113419e-07, 3.754447, 0, 5.412902)
+
+[node name="fence13" parent="WorldEnvironment/Borders" instance=ExtResource("24_l11rc")]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, -3.4073868, 0, 0.60002494)
+
+[node name="Interactables" type="Node3D" parent="WorldEnvironment"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+
+[node name="barrel" parent="WorldEnvironment/Interactables" instance=ExtResource("25_w86vl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2903559, 0.05467191, -1.5529994)
+
+[node name="coins-none" type="StaticBody3D" parent="WorldEnvironment/Interactables/barrel"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Interactables/barrel/coins-none"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5776367e-05, -0.07348633, -0.004272461)
+shape = SubResource("BoxShape3D_mq4nq")
+
+[node name="NPC" type="Node3D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("1_5cjrv")]
+transform = Transform3D(3.166923, 0, 0, 0, 3.166923, 0, 0, 0, 3.6133192, 23.62218, 4.9071093, -1.7274528)
+speed = 10.0
+crouch_speed = 5.0
+jump_force = 8.0
+crouch_height = 0.2
+
+[connection signal="body_entered" from="WorldEnvironment/CoffeeShop/OrderNPC/Area3D" to="WorldEnvironment/CoffeeShop" method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="WorldEnvironment/CoffeeShop/OrderNPC/Area3D" to="WorldEnvironment/CoffeeShop" method="_on_area_3d_body_exited"]
+[connection signal="mouse_entered" from="WorldEnvironment/CoffeeShop/OrderNPC/Area3D" to="WorldEnvironment/CoffeeShop" method="_on_area_3d_mouse_entered"]
+[connection signal="mouse_exited" from="WorldEnvironment/CoffeeShop/OrderNPC/Area3D" to="WorldEnvironment/CoffeeShop" method="_on_area_3d_mouse_exited"]
+[connection signal="finished" from="WorldEnvironment/CoffeeShop/OrderNPC/VoiceLines/Welcome" to="WorldEnvironment/CoffeeShop/OrderNPC/Collider" method="_on_welcome_finished"]
+[connection signal="body_entered" from="WorldEnvironment/CoffeeShop/Triggers/ThiefTrigger" to="WorldEnvironment/CoffeeShop/OrderNPC/Collider" method="_on_thief_trigger_body_entered"]
+[connection signal="body_entered" from="WorldEnvironment/CoffeeShop/Triggers/ThiefTrigger2" to="WorldEnvironment/CoffeeShop/OrderNPC/Collider" method="_on_thief_trigger_2_body_entered"]

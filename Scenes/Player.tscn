@@ -1,0 +1,271 @@
+[gd_scene load_steps=11 format=3 uid="uid://bv6lo5hx8adde"]
+
+[ext_resource type="Script" uid="uid://1w5fk7h2jji6" path="res://Scripts/Player.gd" id="1_rpqav"]
+[ext_resource type="Texture2D" uid="uid://d00x7lbmn00vn" path="res://CoffeeShopStarterPack/UI/crosshair.png" id="2_kyqiw"]
+[ext_resource type="Texture2D" uid="uid://cjes03thtvfeh" path="res://CoffeeShopStarterPack/UI/coin.png" id="3_gntrk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qbkls"]
+albedo_color = Color(0, 1, 0.5882353, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qbkls"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kyqiw"]
+size = Vector3(0.85058594, 1.82164, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kyqiw"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_gntrk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gntrk"]
+size = Vector2(80, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kyqiw"]
+size = Vector2(14, 80)
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_rpqav")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49142647, -0.46432334)
+current = true
+
+[node name="interact" type="RayCast3D" parent="Camera3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -2.8238472e-07, -0.9999993, 0, 6.46021, -4.3711356e-08, 0, -0.026322365, 0.54409856)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_qbkls")
+mesh = SubResource("CapsuleMesh_qbkls")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0024414063, 0.07042694, 0)
+shape = SubResource("BoxShape3D_kyqiw")
+
+[node name="Body" type="Node3D" parent="."]
+
+[node name="Eyes" type="Node3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.012793779, 0.45466352, -0.36350873)
+
+[node name="LeftEye" type="MeshInstance3D" parent="Body/Eyes"]
+transform = Transform3D(0.21308452, 0, 0, 0, 0.19226699, 0, 0, 0, 0.17237996, -0.2000425, 0, 0)
+material_override = SubResource("StandardMaterial3D_kyqiw")
+mesh = SubResource("SphereMesh_gntrk")
+
+[node name="RightEye" type="MeshInstance3D" parent="Body/Eyes"]
+transform = Transform3D(0.21308452, 0, 0, 0, 0.19226699, 0, 0, 0, 0.18047951, 0.21545422, 0, 0)
+material_override = SubResource("StandardMaterial3D_kyqiw")
+mesh = SubResource("SphereMesh_gntrk")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Crosshair" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Crosshair"]
+self_modulate = Color(18.892157, 18.892157, 18.892157, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0625
+offset_top = -52.0625
+offset_right = 52.0625
+offset_bottom = 52.0625
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_kyqiw")
+expand_mode = 1
+
+[node name="InteractLabel" type="MarginContainer" parent="CanvasLayer/Crosshair"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -640.0
+offset_top = -41.00006
+offset_right = 8774.727
+offset_bottom = 260.99994
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.13595721, 0.13595721)
+theme_override_constants/margin_top = 40
+
+[node name="Label" type="Label" parent="CanvasLayer/Crosshair/InteractLabel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 221
+text = "Press \"E\" to interact"
+horizontal_alignment = 1
+
+[node name="Purchase" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Purchase"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 34
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Purchase/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="JAM TOAST" type="Button" parent="CanvasLayer/Purchase/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = " JAM TOAST "
+
+[node name="DONIT" type="Button" parent="CanvasLayer/Purchase/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = " DONUT "
+
+[node name="CHEESECAKE" type="Button" parent="CanvasLayer/Purchase/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = " CHEESECAKE "
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/Purchase/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="COOKIE" type="Button" parent="CanvasLayer/Purchase/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = " COOKIE "
+
+[node name="CROISSANT" type="Button" parent="CanvasLayer/Purchase/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = " CROISSANT "
+
+[node name="CUPCAKE" type="Button" parent="CanvasLayer/Purchase/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = " CUPCAKE  "
+
+[node name="CoinCounter" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 41
+text = "COINS: 0"
+
+[node name="ObjectiveText" type="Label" parent="CanvasLayer"]
+offset_right = 296.0
+offset_bottom = 237.0
+theme_override_font_sizes/font_size = 21
+text = "OBJECTIVE: 
+Get some food from \"Coffee Shop\""
+autowrap_mode = 3
+
+[node name="Packs" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WheelContainer" type="Panel" parent="CanvasLayer/Packs"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Wheel" type="HBoxContainer" parent="CanvasLayer/Packs/WheelContainer"]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 80.0
+theme_override_constants/separation = 6
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Packs/WheelContainer/Wheel"]
+self_modulate = Color(6.848802, 13.750843, 12.130976, 1)
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Packs/WheelContainer/Wheel/Panel"]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 80.0
+texture = ExtResource("3_gntrk")
+expand_mode = 1
+
+[node name="Area2D" type="Area2D" parent="CanvasLayer/Packs/WheelContainer/Wheel/Panel"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Packs/WheelContainer/Wheel/Panel/Area2D"]
+position = Vector2(40, 40)
+shape = SubResource("RectangleShape2D_gntrk")
+
+[node name="Panel2" type="Panel" parent="CanvasLayer/Packs/WheelContainer/Wheel"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Packs/WheelContainer/Wheel/Panel2"]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 80.0
+texture = ExtResource("3_gntrk")
+expand_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Packs"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = -40.0
+offset_right = 7.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.35686275, 0.35686275, 0.35686275, 0.7372549)
+
+[node name="Area2D" type="Area2D" parent="CanvasLayer/Packs/ColorRect"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Packs/ColorRect/Area2D"]
+position = Vector2(7, 40)
+shape = SubResource("RectangleShape2D_kyqiw")
+
+[connection signal="pressed" from="CanvasLayer/Purchase/VBoxContainer/HBoxContainer/JAM TOAST" to="." method="_on_jam_toast_pressed"]
+[connection signal="pressed" from="CanvasLayer/Purchase/VBoxContainer/HBoxContainer/DONIT" to="." method="_on_donit_pressed"]
+[connection signal="pressed" from="CanvasLayer/Purchase/VBoxContainer/HBoxContainer/CHEESECAKE" to="." method="_on_cheesecake_pressed"]
+[connection signal="pressed" from="CanvasLayer/Purchase/VBoxContainer/HBoxContainer2/COOKIE" to="." method="_on_cookie_pressed"]
+[connection signal="pressed" from="CanvasLayer/Purchase/VBoxContainer/HBoxContainer2/CROISSANT" to="." method="_on_croissant_pressed"]
+[connection signal="pressed" from="CanvasLayer/Purchase/VBoxContainer/HBoxContainer2/CUPCAKE" to="." method="_on_cupcake_pressed"]
