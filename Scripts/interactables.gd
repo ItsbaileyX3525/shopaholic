@@ -16,6 +16,9 @@ func _ready() -> void:
 func check_interactables() -> void:
 	items_available -= 1
 	if items_available <= 0:
+		if player.coins >= 0:
+			print("Player had enough+")
+			return
 		camera_3d.position = default_position
 		await get_tree().create_timer(8.2).timeout #Wait for animation to finsih
 		camera_3d.current = true

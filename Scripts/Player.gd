@@ -20,12 +20,14 @@ extends CharacterBody3D
 @onready var packs: Control = $CanvasLayer/Packs
 @onready var coin_collect: AudioStreamPlayer = $CanvasLayer/PackFinish/Collect
 @onready var crosshair: Control = $CanvasLayer/Crosshair
+@onready var day_text: Label = $CanvasLayer/DayText
 
 var is_crouching: bool = false
 var pitch: float = 0.0
 var can_move: bool = true
 var coins: int = 0
 var last_interacted_with
+var on_day: int = 1
 
 @onready var camera: Camera3D = $Camera3D
 @onready var collider: CollisionShape3D = $CollisionShape3D
@@ -46,11 +48,11 @@ var rarities = [
 	"Special Item"
 ]
 var weights = [
-	7992, # 79.92%
-	1598, # 15.98%
-	320,  # 3.20%
-	64,   # 0.64%
-	26    # 0.26%
+	6000, # 60%
+	2000, # 20%
+	1000, # 10%
+	700,  # 7%
+	300   # 3%
 ]
 
 var rarities_relation: Dictionary = {
@@ -85,6 +87,8 @@ func pick_weighted(items: Array, weighted_array: Array) -> Variant:
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	modify_coins(Globals.coins)
+	day_text.text = "Day: %s" % Globals.on_day
 
 func stop_movement() -> void:
 	can_move = false
@@ -135,6 +139,11 @@ func spin_to_item(target_index: int):
 			audio.finished.connect(func(): audio.queue_free())
 
 	pack_finish(last_item_at_center)
+
+func increment_day() -> void:
+	Globals.on_day += 1
+	Globals.coins = coins
+	get_tree().change_scene_to_file("res://Scenes/World.tscn")
 
 func populate_pack() -> void:
 	for e in range(300):

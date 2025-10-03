@@ -22,6 +22,9 @@ var stolen_food: bool = false
 var left_with_food: bool = false
 
 func interact() -> void:
+	if player.coins >= 0:
+		print("Do something related to going onto the next day")
+	
 	if not can_interact:
 		return
 		
