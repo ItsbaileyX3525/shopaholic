@@ -47,20 +47,34 @@ var rarities = [
 	"Covert",
 	"Special Item"
 ]
+
 var weights = [
-	6000, # 60%
-	2000, # 20%
-	1000, # 10%
-	700,  # 7%
-	300   # 3%
 ]
 
+var todays_weights: Array[Array] = [
+	[4000, 3000, 1600, 900, 500],  #Day 1
+	[4423, 2788, 1487, 837, 465],  # Day 2
+	[4846, 2577, 1374, 773, 430],  # Day 3
+	[5269, 2365, 1262, 710, 394],  #Day 4
+	[5692, 2154, 1149, 646, 359],  # Day 5
+	[6115, 1942, 1036, 583, 324],  #Day 6
+	[6538, 1732, 923, 519, 288],   #Day 7
+	[6962, 1519, 810, 456, 253],   #Day 8
+	[7385, 1308, 697, 392, 218],   #Day 9
+	[7808, 1095, 585, 329, 183],   #Day 10
+	[8231, 885, 472, 265, 147],    ##Day 11
+	[8654, 673, 359, 202, 112],    #Day 12
+	[9077, 462, 246, 138, 77],     #Day 13
+	[9500, 250, 133, 75, 42]       #Day 14
+];
+
+
 var rarities_relation: Dictionary = {
-	"Mil-Spec" : [MILSPEC_COLOUR, 1],
-	"Restricted" : [RESTRICTED_COLOUR,3],
-	"Classified" : [CLASSIFIED_COLOUR,5],
-	"Covert" : [COVERT_COLOUR,10],
-	"Special Item" : [SPECIAL_COLOUR,50]
+	"Mil-Spec" : [MILSPEC_COLOUR, 2],
+	"Restricted" : [RESTRICTED_COLOUR,5],
+	"Classified" : [CLASSIFIED_COLOUR,8],
+	"Covert" : [COVERT_COLOUR,12],
+	"Special Item" : [SPECIAL_COLOUR,18]
 }
 
 var index = 0;
@@ -89,6 +103,8 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	modify_coins(Globals.coins)
 	day_text.text = "Day: %s" % Globals.on_day
+	weights = todays_weights[on_day-1].duplicate()
+	print("Weights: ", weights)
 
 func stop_movement() -> void:
 	can_move = false

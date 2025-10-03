@@ -16,16 +16,24 @@ var food_position: Vector3 = Vector3(45.7, 3.14, -19.744)
 @onready var how_pay: AudioStreamPlayer3D = $"../VoiceLines/HowPay"
 @onready var come_back_and_pay: AudioStreamPlayer3D = $"../VoiceLines/ComeBackAndPay"
 @onready var oh_you_came_back: AudioStreamPlayer3D = $"../VoiceLines/OhYouCameBack"
+@onready var thanks_for_paying: AudioStreamPlayer3D = $"../VoiceLines/ThanksForPaying"
+@onready var not_enough: AudioStreamPlayer3D = $"../VoiceLines/NotEnough"
 
 var can_interact: bool = true
 var stolen_food: bool = false
 var left_with_food: bool = false
+var started_game: bool = false
 
 func interact() -> void:
-	if player.coins >= 0:
-		print("Do something related to going onto the next day")
+	if player.coins >= 0 and started_game:
+		thanks_for_paying.play()
+		Globals.on_day += 1
+		Globals.coins = player.coins
+		await thanks_for_paying.finished
+		get_tree().change_scene_to_file("res://Scenes/World.tscn")
 	
-	if not can_interact:
+	if not can_interact and not welcome.playing and not animation_player.is_playing():
+		not_enough.play()
 		return
 		
 	can_interact = false
@@ -38,11 +46,23 @@ func _on_welcome_finished() -> void:
 func steal() -> void:
 	if enjoy.playing:
 		enjoy.stop()
+	if player.coins >= 0:
+		for e in food_collect.get_children():
+			e.visible = false
+		food_collect.position = Vector3(0,-9000,0)
+		player.modify_coins(-20)
+		thanks_for_paying.play()
+		Globals.on_day += 1
+		Globals.coins = player.coins
+		await thanks_for_paying.finished
+		get_tree().change_scene_to_file("res://Scenes/World.tscn")
+
 	how_pay.play()
 	for e in food_collect.get_children():
 		e.visible = false
 	food_collect.position = Vector3(0,-9000,0)
 	player.modify_coins(-20)
+	started_game = true
 	player.objective_find_coins()
 	stolen_food = true
 
