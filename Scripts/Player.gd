@@ -33,12 +33,14 @@ var on_day: int = 1
 @onready var collider: CollisionShape3D = $CollisionShape3D
 
 const click_sound = preload("res://CoffeeShopStarterPack/UI/click.mp3")
+const laugh_sound = preload("res://CoffeeShopStarterPack/UI/laugh.mp3")
 const coin_texture = preload("res://CoffeeShopStarterPack/UI/coin.png")
 const SPECIAL_COLOUR    = Color(18.892, 16.779, 1.637, 1.0)
 const COVERT_COLOUR     = Color(18.188, 6.919, 6.919, 1.0)
 const CLASSIFIED_COLOUR = Color(16.498, 4.736, 17.836, 1.0)
 const RESTRICTED_COLOUR = Color(11.215, 6.638, 18.892, 1.0)
 const MILSPEC_COLOUR    = Color(6.919, 9.032, 18.892, 1.0)
+const CURSED_COLOUR     = Color(8.0, 0.0, 10.0, 1.0)
 
 var rarities = [
 	"Mil-Spec",
@@ -133,7 +135,6 @@ func spin_to_item(target_index: int):
 	
 	wheel.position.x = start_x
 	
-	# Track last item that passed center for sound
 	var last_item_passed = -1
 	
 	var tween = get_tree().create_tween()
@@ -179,6 +180,67 @@ func populate_pack() -> void:
 		panel.add_child(img)
 		wheel.add_child(panel)
 		img.size = Vector2(80,80)
+
+func populate_pack_cursed() -> void:
+	var cursed_items = []
+	
+	# 2 good coins - gain coins
+	cursed_items.append({"type": "good", "value": randi_range(8, 15) * Globals.on_day})
+	cursed_items.append({"type": "good", "value": randi_range(5, 10) * Globals.on_day})
+	
+	# 2 bad coins - lose coins
+	cursed_items.append({"type": "bad", "value": -randi_range(5, 10) * Globals.on_day})
+	cursed_items.append({"type": "bad", "value": -randi_range(3, 7) * Globals.on_day})
+	
+	cursed_items.shuffle()
+	
+	for i in range(cursed_items.size()):
+		var item_data = cursed_items[i]
+		var panel = Panel.new()
+		panel.custom_minimum_size = Vector2(80, 80)
+		panel.name = "%s-cursed" % index
+		index += 1
+		
+		if item_data["type"] == "good":
+			panel.self_modulate = Color(0.0, 1.0, 0.0, 1.0)  # Green for gain
+			panel.set_meta("cursed_type", "good")
+			panel.set_meta("value", item_data["value"])
+		else:
+			panel.self_modulate = CURSED_COLOUR  # Purple for loss
+			panel.set_meta("cursed_type", "bad")
+			panel.set_meta("value", item_data["value"])
+		
+		var img = TextureRect.new()
+		img.texture = coin_texture
+		img.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		img.size = Vector2(80, 80)
+		
+		panel.add_child(img)
+		wheel.add_child(panel)
+	
+	while wheel.get_child_count() < 300:
+		var random_source = cursed_items[randi() % cursed_items.size()]
+		var panel = Panel.new()
+		panel.custom_minimum_size = Vector2(80, 80)
+		panel.name = "%s-cursed" % index
+		index += 1
+		
+		if random_source["type"] == "good":
+			panel.self_modulate = Color(0.0, 1.0, 0.0, 1.0)
+			panel.set_meta("cursed_type", "good")
+			panel.set_meta("value", random_source["value"])
+		else:
+			panel.self_modulate = CURSED_COLOUR
+			panel.set_meta("cursed_type", "bad")
+			panel.set_meta("value", random_source["value"])
+		
+		var img = TextureRect.new()
+		img.texture = coin_texture
+		img.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		img.size = Vector2(80, 80)
+		
+		panel.add_child(img)
+		wheel.add_child(panel)
 
 func pack_finish(item) -> void:
 	packs.visible = false
@@ -228,6 +290,103 @@ func open_pack() -> void:
 	spin_to_item(spinTo)
 	index = 0
 
+func open_cursed_pack() -> void:
+	crosshair.visible = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	packs.visible = true
+	can_move = false
+	populate_pack_cursed()
+	var spinTo = randi_range(170,280)
+	# Wait a frame for children to be properly added
+	await get_tree().process_frame
+	spin_to_item_cursed(spinTo)
+	index = 0
+
+func spin_to_item_cursed(target_index: int):
+	var item_width: float = wheel.get_child(0).size.x
+	var spacing: float = wheel.get_theme_constant("separation")
+	var center_x: float = wheel_container.size.x / 2
+	var item_stride: float = item_width + spacing
+	
+	var target_item_center = target_index * item_stride + item_width / 2
+	var final_x = center_x - target_item_center
+	
+	var extra_items = randi_range(50, 100)
+	var start_x = final_x + (extra_items * item_stride)
+	
+	wheel.position.x = start_x
+	
+	var last_item_passed = -1
+	
+	var tween = get_tree().create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_QUART)
+	tween.tween_property(wheel, "position:x", final_x, 7.0)
+	var last_item_at_center
+	while tween.is_running():
+		await get_tree().create_timer(0.02).timeout
+		var current_x = wheel.position.x
+		var item_at_center = int((center_x - current_x) / item_stride)
+		last_item_at_center = item_at_center
+		if item_at_center != last_item_passed and item_at_center >= 0 and item_at_center < wheel.get_child_count():
+			last_item_passed = item_at_center
+			var audio = AudioStreamPlayer.new()
+			audio.stream = click_sound
+			add_child(audio)
+			audio.play()
+			audio.finished.connect(func(): audio.queue_free())
+
+	pack_finish_cursed(last_item_at_center)
+
+func pack_finish_cursed(item) -> void:
+	packs.visible = false
+	pack_finish_el.visible = true
+	pack_finish_sound.play()
+	var panel_data = wheel.get_child(item)
+	
+	var panel = Panel.new()
+	panel.custom_minimum_size = Vector2(80, 80)
+	panel.size = Vector2(80, 80)
+	panel.position = Vector2(600, 320)
+	panel.self_modulate = panel_data.self_modulate
+	panel.scale = Vector2.ONE
+	
+	var texture = TextureRect.new()
+	texture.texture = coin_texture
+	texture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	texture.size = Vector2(80, 80)
+	panel.add_child(texture)
+	
+	pack_finish_el.add_child(panel)
+	
+	var tween = get_tree().create_tween()
+	tween.tween_property(panel, "position", panel.position + Vector2(0, -20), 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(panel, "scale", Vector2(1.4, 1.4), 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	
+	await get_tree().create_timer(1.1).timeout
+	
+	coin_collect.play()
+	
+	panel.call_deferred("queue_free")
+	
+	var cursed_type = panel_data.get_meta("cursed_type")
+	var value = panel_data.get_meta("value")
+	modify_coins(value)
+	if cursed_type == "good":
+		print("Cursed bin gave you ", value, " coins!")
+	else:
+		print("Cursed bin took ", abs(value), " coins!")
+		# Play laugh sound when player loses coins
+		var laugh_audio = AudioStreamPlayer.new()
+		laugh_audio.stream = laugh_sound
+		add_child(laugh_audio)
+		laugh_audio.play()
+		laugh_audio.finished.connect(func(): laugh_audio.queue_free())
+	
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	can_move = true
+	crosshair.visible = true
+
 func death() -> void:
 	can_move = false
 	crosshair.visible = false
@@ -253,8 +412,15 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_just_pressed("interact"):
 				split[1] = "used"
 				target.name = "coins-%s" % split[1]
-				target.get_parent().get_parent().check_interactables()
+				target.get_parent().get_parent().get_parent().check_interactables()
 				open_pack()
+		elif split[0] == "coins" and split[1] == "cursed":
+			interact_label.visible = true
+			if Input.is_action_just_pressed("interact"):
+				split[1] = "used"
+				target.name = "coins-%s" % split[1]
+				target.get_parent().get_parent().get_parent().check_interactables()
+				open_cursed_pack()
 		else:
 			interact_label.visible = false
 	else:

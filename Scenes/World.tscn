@@ -865,86 +865,104 @@ transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, -3
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 script = ExtResource("27_mq4nq")
 
-[node name="bottle-large3" parent="WorldEnvironment/Interactables" instance=ExtResource("28_mq4nq")]
+[node name="NormalItems" type="Node3D" parent="WorldEnvironment/Interactables"]
+
+[node name="bottle-large3" parent="WorldEnvironment/Interactables/NormalItems" instance=ExtResource("28_mq4nq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7032166, 0.05, 2.6268609)
 
-[node name="coins-none" type="StaticBody3D" parent="WorldEnvironment/Interactables/bottle-large3"]
+[node name="coins-none" type="StaticBody3D" parent="WorldEnvironment/Interactables/NormalItems/bottle-large3"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Interactables/bottle-large3/coins-none"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Interactables/NormalItems/bottle-large3/coins-none"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.001121521, 0.066482544, -0.0022563934)
 shape = SubResource("BoxShape3D_ivfu3")
 
-[node name="barrel" parent="WorldEnvironment/Interactables" instance=ExtResource("25_w86vl")]
+[node name="barrel" parent="WorldEnvironment/Interactables/NormalItems" instance=ExtResource("25_w86vl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2903559, 0.05467191, -1.5529994)
 
-[node name="coins-none" type="StaticBody3D" parent="WorldEnvironment/Interactables/barrel"]
+[node name="coins-none" type="StaticBody3D" parent="WorldEnvironment/Interactables/NormalItems/barrel"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Interactables/barrel/coins-none"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Interactables/NormalItems/barrel/coins-none"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5776367e-05, -0.07348633, -0.004272461)
 shape = SubResource("BoxShape3D_mq4nq")
 
-[node name="bottle-large2" parent="WorldEnvironment/Interactables" instance=ExtResource("28_mq4nq")]
+[node name="bottle-large2" parent="WorldEnvironment/Interactables/NormalItems" instance=ExtResource("28_mq4nq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1285186, 0.05, -1.9355265)
 
-[node name="coins-none" type="StaticBody3D" parent="WorldEnvironment/Interactables/bottle-large2"]
+[node name="coins-none" type="StaticBody3D" parent="WorldEnvironment/Interactables/NormalItems/bottle-large2"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Interactables/bottle-large2/coins-none"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Interactables/NormalItems/bottle-large2/coins-none"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0030975342, 0.0717392, 0.0041503906)
 shape = SubResource("BoxShape3D_y8a40")
 
-[node name="box-large-open2" parent="WorldEnvironment/Interactables" instance=ExtResource("29_371b6")]
+[node name="box-large-open2" parent="WorldEnvironment/Interactables/NormalItems" instance=ExtResource("29_371b6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1834553, 0.05, -6.790249)
 
-[node name="coins-none" type="StaticBody3D" parent="WorldEnvironment/Interactables/box-large-open2"]
+[node name="coins-none" type="StaticBody3D" parent="WorldEnvironment/Interactables/NormalItems/box-large-open2"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Interactables/box-large-open2/coins-none"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Interactables/NormalItems/box-large-open2/coins-none"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.002105713, 0.15847015, -0.028411865)
 shape = SubResource("BoxShape3D_n1aqv")
 
-[node name="box-open2" parent="WorldEnvironment/Interactables" instance=ExtResource("31_371b6")]
+[node name="box-open2" parent="WorldEnvironment/Interactables/NormalItems" instance=ExtResource("31_371b6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8639905, 0.05000005, -6.9457526)
 
-[node name="coins-none" type="StaticBody3D" parent="WorldEnvironment/Interactables/box-open2"]
+[node name="coins-none" type="StaticBody3D" parent="WorldEnvironment/Interactables/NormalItems/box-open2"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Interactables/box-open2/coins-none"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Interactables/NormalItems/box-open2/coins-none"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.047424316, 0.07033539, -0.017456055)
 shape = SubResource("BoxShape3D_d2jk0")
 
-[node name="chest2" parent="WorldEnvironment/Interactables" instance=ExtResource("39_l7i8q")]
+[node name="chest2" parent="WorldEnvironment/Interactables/NormalItems" instance=ExtResource("39_l7i8q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.353042, 0.05, 1.7544044)
 
-[node name="coins-none" type="StaticBody3D" parent="WorldEnvironment/Interactables/chest2"]
+[node name="coins-none" type="StaticBody3D" parent="WorldEnvironment/Interactables/NormalItems/chest2"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Interactables/chest2/coins-none"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Interactables/NormalItems/chest2/coins-none"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0017089844, 0.13214111, 0.009033203)
 shape = SubResource("BoxShape3D_hhume")
 
-[node name="chest3" parent="WorldEnvironment/Interactables" instance=ExtResource("39_l7i8q")]
+[node name="chest3" parent="WorldEnvironment/Interactables/NormalItems" instance=ExtResource("39_l7i8q")]
 transform = Transform3D(-1, 0, 8.7422784e-08, 0, 1, 0, -8.7422784e-08, 0, -1, 5.111895, 0.05, 6.372314)
 
-[node name="coins-none" type="StaticBody3D" parent="WorldEnvironment/Interactables/chest3"]
+[node name="coins-none" type="StaticBody3D" parent="WorldEnvironment/Interactables/NormalItems/chest3"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Interactables/chest3/coins-none"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Interactables/NormalItems/chest3/coins-none"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0017089844, 0.13214111, 0.009033203)
 shape = SubResource("BoxShape3D_hhume")
 
-[node name="bucket2" parent="WorldEnvironment/Interactables" instance=ExtResource("40_7hrk4")]
+[node name="bucket2" parent="WorldEnvironment/Interactables/NormalItems" instance=ExtResource("40_7hrk4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.102621175, 0.05, 6.4817324)
 
-[node name="coins-none" type="StaticBody3D" parent="WorldEnvironment/Interactables/bucket2"]
+[node name="coins-none" type="StaticBody3D" parent="WorldEnvironment/Interactables/NormalItems/bucket2"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Interactables/bucket2/coins-none"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Interactables/NormalItems/bucket2/coins-none"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00018310547, -0.15527344, 0.012542725)
 shape = SubResource("BoxShape3D_au5ix")
 
-[node name="box-large2" parent="WorldEnvironment/Interactables" instance=ExtResource("41_rfukx")]
+[node name="box-large2" parent="WorldEnvironment/Interactables/NormalItems" instance=ExtResource("41_rfukx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8805013, 0.05, 5.133755)
 
-[node name="coins-none" type="StaticBody3D" parent="WorldEnvironment/Interactables/box-large2"]
+[node name="coins-none" type="StaticBody3D" parent="WorldEnvironment/Interactables/NormalItems/box-large2"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Interactables/box-large2/coins-none"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Interactables/NormalItems/box-large2/coins-none"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0012435913, -0.012104034, 0.0009841919)
 shape = SubResource("BoxShape3D_pb8dl")
+
+[node name="SpecialItems" type="Node3D" parent="WorldEnvironment/Interactables"]
+
+[node name="GoldenInteractablesSpawns" type="Node3D" parent="WorldEnvironment/Interactables/SpecialItems"]
+
+[node name="BoxSpawn" type="Marker3D" parent="WorldEnvironment/Interactables/SpecialItems/GoldenInteractablesSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.796, 0.05, 1.797)
+metadata/LightPos = Vector3(-0.212, 0.303, 0)
+
+[node name="BucketSpawn" type="Marker3D" parent="WorldEnvironment/Interactables/SpecialItems/GoldenInteractablesSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.478, 0.05, 5.624)
+metadata/LightPos = Vector3(0.133, 0.18, 0)
+
+[node name="ChestSpawn" type="Marker3D" parent="WorldEnvironment/Interactables/SpecialItems/GoldenInteractablesSpawns"]
+transform = Transform3D(-4.3711392e-08, 0, -1, 0, 1, 0, 1, 0, -4.3711392e-08, -5.009, 0.05, -5.9570003)
+metadata/LightPos = Vector3(0, 0.311, 0.161)
 
 [node name="redroom" type="Node3D" parent="WorldEnvironment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -59.44258, 0)
