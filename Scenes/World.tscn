@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=3 uid="uid://xniyb2msy5dj"]
+[gd_scene load_steps=100 format=3 uid="uid://xniyb2msy5dj"]
 
 [ext_resource type="PackedScene" uid="uid://bv6lo5hx8adde" path="res://Scenes/Player.tscn" id="1_5cjrv"]
 [ext_resource type="Texture2D" uid="uid://dv5xus7v24if1" path="res://CoffeeShopStarterPack/Materials/grass.jpg" id="1_371b6"]
@@ -46,7 +46,10 @@
 [ext_resource type="PackedScene" uid="uid://ba75llr687o5j" path="res://CoffeeShopStarterPack/Models/interactables/chest.glb" id="39_l7i8q"]
 [ext_resource type="PackedScene" uid="uid://dmxgd41n6ov2x" path="res://CoffeeShopStarterPack/Models/interactables/bucket.glb" id="40_7hrk4"]
 [ext_resource type="PackedScene" uid="uid://uoesmdryrbo" path="res://CoffeeShopStarterPack/Models/interactables/box-large.glb" id="41_rfukx"]
+[ext_resource type="PackedScene" uid="uid://cjh3dpgbi2uua" path="res://CoffeeShopStarterPack/NPC/fat-man-c.glb" id="46_qtjmb"]
 [ext_resource type="AudioStream" uid="uid://bjtcilip2vnjh" path="res://CoffeeShopStarterPack/UI/Hello.mp3" id="47_0fglf"]
+[ext_resource type="Script" uid="uid://ds7lgsjjyqt2r" path="res://Scripts/NPCScripts/deal.gd" id="47_l7i8q"]
+[ext_resource type="AudioStream" uid="uid://2ffdwwi4t2mw" path="res://CoffeeShopStarterPack/UI/sweetdeal.mp3" id="48_7hrk4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5cjrv"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -247,6 +250,9 @@ size = Vector3(0.13830566, 0.6894531, 0.11578369)
 size = Vector3(0.24879456, 0.51226044, 0.5016327)
 
 [sub_resource type="BoxMesh" id="BoxMesh_mq4nq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rfukx"]
+size = Vector3(2.076889, 1.604248, 1)
 
 [node name="World" type="Node3D"]
 
@@ -640,6 +646,24 @@ mesh = SubResource("BoxMesh_0fglf")
 [node name="Label3D" type="Label3D" parent="WorldEnvironment/Houses/Sign"]
 transform = Transform3D(-0.09066362, 0, 8.742278e-09, 0, 0.12673752, 0, -7.926065e-09, 0, -0.10000001, 0.000890851, 0.11382861, -0.01008749)
 text = "COLLISION UNDER CONSTRUCTION"
+autowrap_mode = 3
+
+[node name="67" type="Node3D" parent="WorldEnvironment/Houses"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.3311646, 0, 2.4644408)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldEnvironment/Houses/67"]
+transform = Transform3D(0.01832333, 0, 0, 0, -0.09860496, 0, 0, 0, 0.015972069, 0, 0.040846813, 0)
+material_override = SubResource("StandardMaterial3D_ivbkn")
+mesh = SubResource("BoxMesh_0fglf")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="WorldEnvironment/Houses/67"]
+transform = Transform3D(0.13880596, 0, 0, 0, -0.06796533, 0, 0, 0, 0.015972069, 0, 0.11319943, 0)
+material_override = SubResource("StandardMaterial3D_qtjmb")
+mesh = SubResource("BoxMesh_0fglf")
+
+[node name="Label3D" type="Label3D" parent="WorldEnvironment/Houses/67"]
+transform = Transform3D(-0.09066362, 0, 8.742278e-09, 0, 0.12673752, 0, -7.926065e-09, 0, -0.10000001, 0.000890851, 0.11382861, -0.01008749)
+text = "67"
 autowrap_mode = 3
 
 [node name="Borders" type="Node3D" parent="WorldEnvironment"]
@@ -1065,6 +1089,24 @@ stream = ExtResource("33_ao4cr")
 
 [node name="whynopay" type="AudioStreamPlayer" parent="WorldEnvironment/redroom"]
 stream = ExtResource("34_irg3d")
+
+[node name="Dealer" type="Node3D" parent="WorldEnvironment"]
+visible = false
+
+[node name="fat-man-c2" parent="WorldEnvironment/Dealer" instance=ExtResource("46_qtjmb")]
+transform = Transform3D(1.7499999, 0, -3.031089, 0, 3.5, 0, 3.031089, 0, 1.7499999, 42.09063, 0.5, -9.2448635)
+
+[node name="deal" type="StaticBody3D" parent="WorldEnvironment/Dealer/fat-man-c2"]
+script = ExtResource("47_l7i8q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Dealer/fat-man-c2/deal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.011300325, 0.88293487, 0)
+shape = SubResource("BoxShape3D_rfukx")
+disabled = true
+
+[node name="SweetDeal" type="AudioStreamPlayer3D" parent="WorldEnvironment/Dealer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.20246, 0, -8.76184)
+stream = ExtResource("48_7hrk4")
 
 [node name="NPC" type="Node3D" parent="."]
 

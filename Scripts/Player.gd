@@ -21,6 +21,7 @@ extends CharacterBody3D
 @onready var coin_collect: AudioStreamPlayer = $CanvasLayer/PackFinish/Collect
 @onready var crosshair: Control = $CanvasLayer/Crosshair
 @onready var day_text: Label = $CanvasLayer/DayText
+@onready var purchase_2: Control = $CanvasLayer/Purchase2
 
 var is_crouching: bool = false
 var pitch: float = 0.0
@@ -106,7 +107,7 @@ func _ready() -> void:
 	modify_coins(Globals.coins)
 	day_text.text = "Day: %s" % Globals.on_day
 	weights = todays_weights[Globals.on_day-1].duplicate()
-	print("Weights: ", weights)
+	speed = speed + Globals.bonus_speed
 
 func stop_movement() -> void:
 	can_move = false
@@ -273,7 +274,7 @@ func pack_finish(item) -> void:
 	
 	panel.call_deferred("queue_free")
 	
-	modify_coins(panel_data.get_meta("value"))
+	modify_coins(panel_data.get_meta("value") * Globals.multiplier)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	can_move = true
 	crosshair.visible = true
@@ -283,6 +284,11 @@ func open_pack() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	packs.visible = true
 	can_move = false
+	# Clear existing wheel items
+	for child in wheel.get_children():
+		child.call_deferred("queue_free")
+	# Wait for children to be removed
+	await get_tree().process_frame
 	populate_pack()
 	var spinTo = randi_range(170,280)
 	# Wait a frame for children to be properly added
@@ -295,6 +301,11 @@ func open_cursed_pack() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	packs.visible = true
 	can_move = false
+	# Clear existing wheel items
+	for child in wheel.get_children():
+		child.call_deferred("queue_free")
+	# Wait for children to be removed
+	await get_tree().process_frame
 	populate_pack_cursed()
 	var spinTo = randi_range(170,280)
 	# Wait a frame for children to be properly added
@@ -371,12 +382,9 @@ func pack_finish_cursed(item) -> void:
 	
 	var cursed_type = panel_data.get_meta("cursed_type")
 	var value = panel_data.get_meta("value")
-	modify_coins(value)
-	if cursed_type == "good":
-		print("Cursed bin gave you ", value, " coins!")
-	else:
-		print("Cursed bin took ", abs(value), " coins!")
-		# Play laugh sound when player loses coins
+	print("DEBUG: cursed_type=", cursed_type, " value=", value)
+	modify_coins(value * Globals.multiplier)
+	if cursed_type != "good":
 		var laugh_audio = AudioStreamPlayer.new()
 		laugh_audio.stream = laugh_sound
 		add_child(laugh_audio)
@@ -471,6 +479,15 @@ func hide_purchases() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	can_move = true
 
+func show_upgrades() -> void:
+	purchase_2.visible = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+func hide_upgrades() -> void:
+	purchase_2.visible = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	can_move = true
+
 func _on_cupcake_pressed() -> void:
 	last_interacted_with.purchase("CUPCAKE")
 	hide_purchases()
@@ -497,3 +514,15 @@ func _on_jam_toast_pressed() -> void:
 
 func objective_find_coins() -> void:
 	objective_text.text = "OBJECTIVE:\nFind some coins to pay for your food.\nHINT: Check bins and barrels."
+
+func _on_price_pressed() -> void:
+	last_interacted_with.purchase("PRICE")
+	hide_upgrades()
+	
+func _on_multiplier_pressed() -> void:
+	last_interacted_with.purchase("MULTIPLIER")
+	hide_upgrades()
+
+func _on_speed_pressed() -> void:
+	last_interacted_with.purchase("SPEED")
+	hide_upgrades()

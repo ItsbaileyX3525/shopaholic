@@ -169,6 +169,49 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = " CUPCAKE  "
 
+[node name="Purchase2" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Purchase2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 34
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Purchase2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SPEED" type="Button" parent="CanvasLayer/Purchase2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "SPEED - 10 Coins"
+
+[node name="MULTIPLIER" type="Button" parent="CanvasLayer/Purchase2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "MULTIPLIER - 15 Coins"
+
+[node name="PRICE" type="Button" parent="CanvasLayer/Purchase2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "FOOD PRICE DECREASE - 20 COINS"
+
 [node name="CoinCounter" type="Label" parent="CanvasLayer"]
 anchors_preset = 1
 anchor_left = 1.0
@@ -286,3 +329,6 @@ stream = ExtResource("6_nn08x")
 [connection signal="pressed" from="CanvasLayer/Purchase/VBoxContainer/HBoxContainer2/COOKIE" to="." method="_on_cookie_pressed"]
 [connection signal="pressed" from="CanvasLayer/Purchase/VBoxContainer/HBoxContainer2/CROISSANT" to="." method="_on_croissant_pressed"]
 [connection signal="pressed" from="CanvasLayer/Purchase/VBoxContainer/HBoxContainer2/CUPCAKE" to="." method="_on_cupcake_pressed"]
+[connection signal="pressed" from="CanvasLayer/Purchase2/VBoxContainer/HBoxContainer/SPEED" to="." method="_on_speed_pressed"]
+[connection signal="pressed" from="CanvasLayer/Purchase2/VBoxContainer/HBoxContainer/MULTIPLIER" to="." method="_on_multiplier_pressed"]
+[connection signal="pressed" from="CanvasLayer/Purchase2/VBoxContainer/HBoxContainer/PRICE" to="." method="_on_price_pressed"]

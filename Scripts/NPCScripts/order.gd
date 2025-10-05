@@ -18,6 +18,8 @@ var food_position: Vector3 = Vector3(45.7, 3.14, -19.744)
 @onready var oh_you_came_back: AudioStreamPlayer3D = $"../VoiceLines/OhYouCameBack"
 @onready var thanks_for_paying: AudioStreamPlayer3D = $"../VoiceLines/ThanksForPaying"
 @onready var not_enough: AudioStreamPlayer3D = $"../VoiceLines/NotEnough"
+@onready var sweet_deal: AudioStreamPlayer3D = $"../../../Dealer/SweetDeal"
+@onready var fat_man_c_2: Node3D = $"../../../Dealer/fat-man-c2"
 
 var can_interact: bool = true
 var stolen_food: bool = false
@@ -29,6 +31,7 @@ func interact() -> void:
 		thanks_for_paying.play()
 		Globals.on_day += 1
 		Globals.coins = player.coins
+		Globals.bonus_speed = player.speed - 5.0
 		await thanks_for_paying.finished
 		get_tree().change_scene_to_file("res://Scenes/World.tscn")
 	
@@ -46,14 +49,15 @@ func _on_welcome_finished() -> void:
 func steal() -> void:
 	if enjoy.playing:
 		enjoy.stop()
-	if player.coins >= 20:
+	if player.coins >= (20 - Globals.food_deduction):
 		for e in food_collect.get_children():
 			e.visible = false
 		food_collect.position = Vector3(0,-9000,0)
-		player.modify_coins(-20)
+		player.modify_coins(-(20 - Globals.food_deduction))
 		thanks_for_paying.play()
 		Globals.on_day += 1
 		Globals.coins = player.coins
+		Globals.bonus_speed = player.speed - 5.0
 		await thanks_for_paying.finished
 		get_tree().change_scene_to_file("res://Scenes/World.tscn")
 
@@ -61,7 +65,7 @@ func steal() -> void:
 	for e in food_collect.get_children():
 		e.visible = false
 	food_collect.position = Vector3(0,-9000,0)
-	player.modify_coins(-20)
+	player.modify_coins(-(20 - Globals.food_deduction))
 	started_game = true
 	player.objective_find_coins()
 	stolen_food = true
