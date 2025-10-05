@@ -103,7 +103,7 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	modify_coins(Globals.coins)
 	day_text.text = "Day: %s" % Globals.on_day
-	weights = todays_weights[on_day-1].duplicate()
+	weights = todays_weights[Globals.on_day-1].duplicate()
 	print("Weights: ", weights)
 
 func stop_movement() -> void:

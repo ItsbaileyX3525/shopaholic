@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=3 uid="uid://xniyb2msy5dj"]
+[gd_scene load_steps=96 format=3 uid="uid://xniyb2msy5dj"]
 
 [ext_resource type="PackedScene" uid="uid://bv6lo5hx8adde" path="res://Scenes/Player.tscn" id="1_5cjrv"]
 [ext_resource type="Texture2D" uid="uid://dv5xus7v24if1" path="res://CoffeeShopStarterPack/Materials/grass.jpg" id="1_371b6"]
@@ -46,6 +46,7 @@
 [ext_resource type="PackedScene" uid="uid://ba75llr687o5j" path="res://CoffeeShopStarterPack/Models/interactables/chest.glb" id="39_l7i8q"]
 [ext_resource type="PackedScene" uid="uid://dmxgd41n6ov2x" path="res://CoffeeShopStarterPack/Models/interactables/bucket.glb" id="40_7hrk4"]
 [ext_resource type="PackedScene" uid="uid://uoesmdryrbo" path="res://CoffeeShopStarterPack/Models/interactables/box-large.glb" id="41_rfukx"]
+[ext_resource type="AudioStream" uid="uid://bjtcilip2vnjh" path="res://CoffeeShopStarterPack/UI/Hello.mp3" id="47_0fglf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5cjrv"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -1055,6 +1056,11 @@ speed = 10.0
 crouch_speed = 5.0
 jump_force = 8.0
 crouch_height = 0.2
+
+[node name="bgmusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("47_0fglf")
+volume_db = -23.807
+autoplay = true
 
 [connection signal="body_entered" from="WorldEnvironment/CoffeeShop/OrderNPC/Area3D" to="WorldEnvironment/CoffeeShop" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="WorldEnvironment/CoffeeShop/OrderNPC/Area3D" to="WorldEnvironment/CoffeeShop" method="_on_area_3d_body_exited"]

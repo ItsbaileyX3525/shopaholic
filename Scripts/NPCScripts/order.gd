@@ -46,7 +46,7 @@ func _on_welcome_finished() -> void:
 func steal() -> void:
 	if enjoy.playing:
 		enjoy.stop()
-	if player.coins >= 0:
+	if player.coins >= 20:
 		for e in food_collect.get_children():
 			e.visible = false
 		food_collect.position = Vector3(0,-9000,0)
