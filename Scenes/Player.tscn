@@ -25,6 +25,8 @@ size = Vector2(14, 80)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_rpqav")
+bhop_acceleration = 2.0
+bhop_max_speed = 20.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49142647, -0.46432334)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=3 uid="uid://xniyb2msy5dj"]
+[gd_scene load_steps=101 format=3 uid="uid://xniyb2msy5dj"]
 
 [ext_resource type="PackedScene" uid="uid://bv6lo5hx8adde" path="res://Scenes/Player.tscn" id="1_5cjrv"]
 [ext_resource type="Texture2D" uid="uid://dv5xus7v24if1" path="res://CoffeeShopStarterPack/Materials/grass.jpg" id="1_371b6"]
@@ -50,6 +50,7 @@
 [ext_resource type="AudioStream" uid="uid://bjtcilip2vnjh" path="res://CoffeeShopStarterPack/UI/Hello.mp3" id="47_0fglf"]
 [ext_resource type="Script" uid="uid://ds7lgsjjyqt2r" path="res://Scripts/NPCScripts/deal.gd" id="47_l7i8q"]
 [ext_resource type="AudioStream" uid="uid://2ffdwwi4t2mw" path="res://CoffeeShopStarterPack/UI/sweetdeal.mp3" id="48_7hrk4"]
+[ext_resource type="AudioStream" uid="uid://bdq60maac5byf" path="res://CoffeeShopStarterPack/UI/outofstock.mp3" id="49_7hrk4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5cjrv"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -1107,6 +1108,10 @@ disabled = true
 [node name="SweetDeal" type="AudioStreamPlayer3D" parent="WorldEnvironment/Dealer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.20246, 0, -8.76184)
 stream = ExtResource("48_7hrk4")
+
+[node name="OutOfStock" type="AudioStreamPlayer3D" parent="WorldEnvironment/Dealer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.20246, 0, -8.76184)
+stream = ExtResource("49_7hrk4")
 
 [node name="NPC" type="Node3D" parent="."]
 

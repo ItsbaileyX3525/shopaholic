@@ -3,6 +3,7 @@ extends StaticBody3D
 @onready var dealer: Node3D = $"../.."
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
 @onready var sweet_deal: AudioStreamPlayer3D = $"../../SweetDeal"
+@onready var out_of_stock: AudioStreamPlayer3D = $"../../OutOfStock"
 
 func show_dealer() -> void:
 	dealer.visible = true
@@ -10,7 +11,7 @@ func show_dealer() -> void:
 	sweet_deal.play()
 
 func _ready() -> void:
-	if Globals.on_day == 2:
+	if Globals.on_day >= 2:
 		show_dealer()
 
 func interact() -> void:
@@ -18,10 +19,16 @@ func interact() -> void:
 	
 func purchase(item: String) -> void:
 	if item == "PRICE":
+		if Globals.food_deduction == 15:
+			out_of_stock.play()
+			return
 		if player.coins >= 20:
 			player.modify_coins(-20)
 			Globals.food_deduction += 1
 	elif item == "MULTIPLIER":
+		if Globals.multiplier >= 3.5:
+			out_of_stock.play()
+			return
 		if player.coins >= 15:
 			player.modify_coins(-15)
 			Globals.multiplier += 0.25

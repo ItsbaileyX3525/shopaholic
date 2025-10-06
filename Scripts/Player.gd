@@ -8,6 +8,11 @@ extends CharacterBody3D
 @export var standing_height: float = 2.0
 @export var mouse_sensitivity: float = 0.2
 @export var max_look_angle: float = 85.0
+@export var bhop_acceleration: float = 0.3
+@export var bhop_max_speed: float = 12.0
+@export var air_control: float = 0.8
+@export var coyote_time: float = 0.15
+@export var jump_buffer_time: float = 0.15
 @onready var interact: RayCast3D = %interact
 @onready var interact_label: MarginContainer = $CanvasLayer/Crosshair/InteractLabel
 @onready var purchase: Control = $CanvasLayer/Purchase
@@ -26,9 +31,13 @@ extends CharacterBody3D
 var is_crouching: bool = false
 var pitch: float = 0.0
 var can_move: bool = true
-var coins: int = 0
+var coins: int = 50
 var last_interacted_with
 var on_day: int = 1
+var current_speed: float = 5.0
+var was_on_floor: bool = false
+var coyote_timer: float = 0.0
+var jump_buffer_timer: float = 0.0
 
 @onready var camera: Camera3D = $Camera3D
 @onready var collider: CollisionShape3D = $CollisionShape3D
@@ -65,7 +74,7 @@ var todays_weights: Array[Array] = [
 	[6962, 1519, 810, 456, 253],   #Day 8
 	[7385, 1308, 697, 392, 218],   #Day 9
 	[7808, 1095, 585, 329, 183],   #Day 10
-	[8231, 885, 472, 265, 147],    ##Day 11
+	[8231, 885, 472, 265, 147],    #Day 11
 	[8654, 673, 359, 202, 112],    #Day 12
 	[9077, 462, 246, 138, 77],     #Day 13
 	[9500, 250, 133, 75, 42]       #Day 14
@@ -440,19 +449,63 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("walk_left", "walk_right", "walk_forward", "walk_backwards")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
+	# Bunnyhopping mechanics with coyote time
+	var on_floor = is_on_floor()
+	
+	# Update coyote timer - gives grace  after leaving ground
+	if on_floor:
+		coyote_timer = coyote_time
+	else:
+		coyote_timer -= delta
+	
+	if Input.is_action_just_pressed("jump"):
+		jump_buffer_timer = jump_buffer_time
+	else:
+		jump_buffer_timer -= delta
+	
+	var can_jump = (on_floor or coyote_timer > 0) and not is_crouching
+	var wants_to_jump = jump_buffer_timer > 0
+	
 	if direction != Vector3.ZERO:
 		if is_crouching:
 			velocity.x = direction.x * crouch_speed
 			velocity.z = direction.z * crouch_speed
+			current_speed = crouch_speed
 		else:
-			velocity.x = direction.x * speed
-			velocity.z = direction.z * speed
+			# Air control - reduced movement in air
+			var control_factor = air_control if not on_floor else 1.0
+			
+			# Maintain or increase speed in air (bunnyhopping)
+			var target_speed = current_speed
+			
+			# Apply movement with current speed
+			var target_velocity_x = direction.x * target_speed
+			var target_velocity_z = direction.z * target_speed
+			
+			velocity.x = lerp(velocity.x, target_velocity_x, control_factor)
+			velocity.z = lerp(velocity.z, target_velocity_z, control_factor)
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
-		velocity.z = move_toward(velocity.z, 0, speed)
+		# Decelerate when no input
+		velocity.x = move_toward(velocity.x, 0, speed * 0.5)
+		velocity.z = move_toward(velocity.z, 0, speed * 0.5)
 
-	if Input.is_action_just_pressed("jump") and is_on_floor() and not is_crouching:
+	# Bunnyhopping jump logic with coyote time and jump buffering
+	if wants_to_jump and can_jump:
 		velocity.y = jump_force
+		jump_buffer_timer = 0  # Consume the buffered jump
+		coyote_timer = 0  # Consume coyote time
+		
+		# Increase speed on every successful jump (bunnyhopping)
+		current_speed = min(current_speed + bhop_acceleration, bhop_max_speed)
+		print("Bhop! Speed: ", current_speed)  # Debug output
+	
+	# Gradually reset speed when on ground and not jumping
+	if on_floor and not wants_to_jump:
+		if input_dir.length() == 0:
+			# Standing still - reset to base speed
+			current_speed = move_toward(current_speed, speed + Globals.bonus_speed, delta * 5.0)
+	
+	was_on_floor = on_floor
 
 	if Input.is_action_pressed("crouch") and is_on_floor():
 		is_crouching = true
