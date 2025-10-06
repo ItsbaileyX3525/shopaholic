@@ -449,10 +449,8 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("walk_left", "walk_right", "walk_forward", "walk_backwards")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
-	# Bunnyhopping mechanics with coyote time
 	var on_floor = is_on_floor()
 	
-	# Update coyote timer - gives grace  after leaving ground
 	if on_floor:
 		coyote_timer = coyote_time
 	else:
@@ -472,38 +470,28 @@ func _physics_process(delta: float) -> void:
 			velocity.z = direction.z * crouch_speed
 			current_speed = crouch_speed
 		else:
-			# Air control - reduced movement in air
 			var control_factor = air_control if not on_floor else 1.0
 			
-			# Maintain or increase speed in air (bunnyhopping)
 			var target_speed = current_speed
 			
-			# Apply movement with current speed
 			var target_velocity_x = direction.x * target_speed
 			var target_velocity_z = direction.z * target_speed
 			
 			velocity.x = lerp(velocity.x, target_velocity_x, control_factor)
 			velocity.z = lerp(velocity.z, target_velocity_z, control_factor)
 	else:
-		# Decelerate when no input
 		velocity.x = move_toward(velocity.x, 0, speed * 0.5)
 		velocity.z = move_toward(velocity.z, 0, speed * 0.5)
 
-	# Bunnyhopping jump logic with coyote time and jump buffering
 	if wants_to_jump and can_jump:
 		velocity.y = jump_force
-		jump_buffer_timer = 0  # Consume the buffered jump
-		coyote_timer = 0  # Consume coyote time
+		jump_buffer_timer = 0
+		coyote_timer = 0
 		
-		# Increase speed on every successful jump (bunnyhopping)
 		current_speed = min(current_speed + bhop_acceleration, bhop_max_speed)
-		print("Bhop! Speed: ", current_speed)  # Debug output
-	
-	# Gradually reset speed when on ground and not jumping
-	if on_floor and not wants_to_jump:
-		if input_dir.length() == 0:
-			# Standing still - reset to base speed
-			current_speed = move_toward(current_speed, speed + Globals.bonus_speed, delta * 5.0)
+	else:
+		if on_floor and not was_on_floor:
+			current_speed = speed + Globals.bonus_speed
 	
 	was_on_floor = on_floor
 

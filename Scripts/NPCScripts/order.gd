@@ -49,23 +49,27 @@ func _on_welcome_finished() -> void:
 func steal() -> void:
 	if enjoy.playing:
 		enjoy.stop()
-	if player.coins >= (20 - Globals.food_deduction):
+	
+	var food_cost = 20 - Globals.food_deduction
+	
+	if player.coins >= food_cost:
 		for e in food_collect.get_children():
 			e.visible = false
 		food_collect.position = Vector3(0,-9000,0)
-		player.modify_coins(-(20 - Globals.food_deduction))
+		player.modify_coins(-food_cost)
 		thanks_for_paying.play()
 		Globals.on_day += 1
 		Globals.coins = player.coins
 		Globals.bonus_speed = player.speed - 5.0
 		await thanks_for_paying.finished
 		get_tree().change_scene_to_file("res://Scenes/World.tscn")
-
+		return
+	
 	how_pay.play()
 	for e in food_collect.get_children():
 		e.visible = false
 	food_collect.position = Vector3(0,-9000,0)
-	player.modify_coins(-(20 - Globals.food_deduction))
+	player.modify_coins(-food_cost)
 	started_game = true
 	player.objective_find_coins()
 	stolen_food = true
